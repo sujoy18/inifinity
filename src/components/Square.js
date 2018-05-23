@@ -1,27 +1,35 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+//@flow
+import React, {Component, type Node} from "react";
 
-export default class Square extends Component {
-  static propsTypes = {
-    black: PropTypes.bool
-  };
+type Props = {
+  black: bool,
+  children: Node,
+  onHandleClick: Function,
+  position: Object
+}
+export default class Square extends Component < Props > {
 
   render() {
-    const { black } = this.props;
-    const fill = black ? "black" : "white";
-    const stroke = black ? "white" : "black";
+    const {black, position, children, onHandleClick} = this.props;
+    const fill = black
+      ? "black"
+      : "white";
+    const stroke = black
+      ? "white"
+      : "black";
 
     return (
       <div
         style={{
-          backgroundColor: fill,
-          color: stroke,
-          width: "20px",
-          height: "20px",
-          float: "left"
-        }}
-      >
-        {this.props.children}
+        backgroundColor: fill,
+        color: stroke,
+        width: "100%",
+        height: "100%"
+      }}
+        onClick={() => {
+        onHandleClick(position)
+      }}>
+        {children}
       </div>
     );
   }

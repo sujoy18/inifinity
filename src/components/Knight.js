@@ -1,7 +1,9 @@
 //@flow
-import React, { Component } from "react";
-export default class Knight extends Component {
-  render() {
-    return <span>♘</span>;
-  }
-}
+import React from "react";
+const Knight = () => (
+  <span>
+    ♘
+  </span>
+);
+
+export default Knight;

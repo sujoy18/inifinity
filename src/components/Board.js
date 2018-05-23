@@ -1,24 +1,50 @@
 //@flow
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, {Component} from "react";
+import {DragDropContext} from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import Knight from "./Knight";
 import Square from "./Square";
 
-export default class Board extends Component {
-  static propTypes = {
-    knightPosition: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
-  };
+type Props = {
+  knightPosition: Array < number >,
+  onClickHandle: Function
+}
 
-  renderSquare(x, y) {
-    const black = (x + y) % 2 === 1;
+export default class Board extends Component < Props > {
 
-    const [knightX, knightY] = this.props.knightPosition;
-
-    const piece = knightX === x && knightY === y ? <Knight /> : null;
-
-    return <Square black={black}> {piece} </Square>;
+  handleClick = (position : Object) => {
+    this
+      .props
+      .onClickHandle(position)
   }
 
+  renderSquare(index : number) {
+    const x = (index % 8);
+    const y = Math.floor((index / 8));
+    const black = (x + y) % 2 === 1;
+
+    const [knightX,
+      knightY] = this.props.knightPosition;
+
+    const piece = knightX === x && knightY === y
+      ? <Knight/>
+      : null;
+
+    return <div key={index} style={{
+      width: '12.5%',
+      height: '12.5%'
+    }}>
+      <Square
+        onHandleClick={this.handleClick}
+        black={black}
+        position={{
+        x: x,
+        y: y
+      }}>
+        {piece}
+      </Square>
+    </div>;
+  }
   render() {
     const squares = [];
     for (let index = 0; index < 64; index++) {
@@ -27,10 +53,13 @@ export default class Board extends Component {
     return (
       <div
         style={{
-          width: "100%",
-          height: "100%"
-        }}
-      />
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexWrap: "wrap"
+      }}>
+        {squares}
+      </div>
     );
   }
 }
