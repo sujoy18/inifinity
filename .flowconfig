@@ -1,8 +1,7 @@
 [ignore]
-.*/node_modules/.*
 .*\test\.js
 [include]
-
+.*/node_modules/.*
 [libs]
 
 [lints]

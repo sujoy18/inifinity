@@ -3,14 +3,14 @@ import React, {Component} from "react";
 import {DragDropContext} from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import Knight from "./Knight";
-import Square from "./Square";
+import BoardSquare from "./BoardSquare";
 
 type Props = {
   knightPosition: Array < number >,
   onClickHandle: Function
 }
 
-export default class Board extends Component < Props > {
+class Board extends Component < Props > {
 
   handleClick = (position : Object) => {
     this
@@ -34,7 +34,7 @@ export default class Board extends Component < Props > {
       width: '12.5%',
       height: '12.5%'
     }}>
-      <Square
+      <BoardSquare
         onHandleClick={this.handleClick}
         black={black}
         position={{
@@ -42,7 +42,7 @@ export default class Board extends Component < Props > {
         y: y
       }}>
         {piece}
-      </Square>
+      </BoardSquare>
     </div>;
   }
   render() {
@@ -63,3 +63,4 @@ export default class Board extends Component < Props > {
     );
   }
 }
+export default DragDropContext(HTML5Backend)(Board);

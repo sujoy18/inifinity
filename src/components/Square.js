@@ -1,23 +1,19 @@
-//@flow
-import React, {Component, type Node} from "react";
+import React, {type Node, Component} from 'react';
 
-type Props = {
-  black: bool,
-  children: Node,
-  onHandleClick: Function,
-  position: Object
+const props = {
+  black: Boolean,
+  children: Node
 }
-export default class Square extends Component < Props > {
+class Square extends Component < props > {
 
   render() {
-    const {black, position, children, onHandleClick} = this.props;
+    const {black, children} = this.props
     const fill = black
       ? "black"
       : "white";
     const stroke = black
       ? "white"
       : "black";
-
     return (
       <div
         style={{
@@ -25,12 +21,9 @@ export default class Square extends Component < Props > {
         color: stroke,
         width: "100%",
         height: "100%"
-      }}
-        onClick={() => {
-        onHandleClick(position)
-      }}>
-        {children}
-      </div>
-    );
+      }}>{children}</div>
+    )
+
   }
 }
+export default Square;
