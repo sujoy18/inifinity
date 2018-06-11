@@ -1,6 +1,6 @@
 //@flow
 import React, {Component} from "react";
-import {bindActionCreators} from 'redux';
+import {bindActionCreators, type Dispatch} from 'redux';
 import {connect} from 'react-redux'
 import Board from "./Board";
 import * as PeiceActions from '../actions/peiceActions'
@@ -8,9 +8,10 @@ import {type MoveAction} from '../actions/type/acytionType'
 import {type PieceState} from '../reducers/type/peiceState';
 
 type Props = {
-  makeMove: MoveAction,
-  piece: PieceState,
-  actions: Object
+  peice: PieceState,
+  actions: {
+    makeMove: MoveAction
+  }
 }
 type State = {
   position: Object
@@ -24,39 +25,33 @@ State > {
     }
   }
 
-  handleClick = (piecePosition : Object) => {
-    this.setState({
-      position: {
-        x: piecePosition.x,
-        y: piecePosition.y
-      }
-    })
-    debugger;
+  handleDragDrop = ({x, y} : Object) => {
+    // this.setState({   position: {     x: position.x,     y: position.y   } })
+
     this
       .props
       .actions
       .makeMove({
         peiceName: 'KNIGHT',
         position: {
-          x: 1,
-          y: 0
+          x: x,
+          y: y
         }
       })
   }
 
   render() {
     debugger;
-    return <Board
-      knightPosition={[this.state.position.x, this.state.position.y]}
-      onClickHandle={this.handleClick}/>;
+    const {x, y} = this.props.peice.position;
+    return <Board knightPosition={[x, y]} onHandleDragDrop={this.handleDragDrop}/>;
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return {piece: state.pieceState}
+  return {peice: state.peice}
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch : Dispatch, ownProps) => {
   return {
     actions: {
       ...bindActionCreators(PeiceActions, dispatch)
@@ -64,5 +59,5 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-const ChessContainer = connect(mapStateToProps, mapDispatchToProps)(Chess)
+const ChessContainer = connect(mapStateToProps, mapDispatchToProps)(Chess);
 export default ChessContainer;

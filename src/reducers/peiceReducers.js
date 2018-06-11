@@ -1,16 +1,18 @@
-import {type PieceState} from './type/peiceState'
+//@flow
+import {type PeiceState} from './type/peiceState'
+import {type MoveAction} from '../actions/type/acytionType';
 import MOVE_PEICE from '../actions/actionConstants';
-const defaultPeiceState : PieceState = {
-  position: {
-    x: 0,
-    y: 0
-  },
-  peiceName: 'KNIGHT'
-}
-export default function (pieceState = defaultPeiceState, action) {
+import {defaultPeiceState} from './initalState'
+
+export default function (peiceState : PeiceState = defaultPeiceState, action : MoveAction) {
+  console.log(action)
   if (action.type === MOVE_PEICE) {
     //call can move call move if can move
-    return pieceState
+    return {
+      ...peiceState,
+      position: action.peiceState.position
+    }
+
   }
-  return pieceState;
+  return peiceState;
 }

@@ -3,5 +3,5 @@ type Position = {
   y: number
 }
 
-export type PieceState = { + peiceName: string, + position: Position
+export type PeiceState = { + peiceName: string, + position: Position
 }

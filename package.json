@@ -39,6 +39,7 @@
     "react-dnd-html5-backend": "^2.6.0",
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
+    "react-test-renderer": "^16.4.0",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "resolve": "1.6.0",
@@ -60,7 +61,8 @@
       "src/**/*.{js,jsx,mjs}"
     ],
     "setupFiles": [
-      "<rootDir>/config/polyfills.js"
+      "<rootDir>/config/polyfills.js",
+      "<rootDir>/testSetup/jestSetup.js"
     ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
@@ -98,6 +100,9 @@
     "extends": "react-app"
   },
   "devDependencies": {
-    "flow-bin": "^0.72.0"
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "flow-bin": "^0.72.0",
+    "react-dnd-test-backend": "^4.0.4"
   }
 }

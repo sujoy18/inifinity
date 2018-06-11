@@ -4,10 +4,8 @@ import {DragSource, type DragSourceType} from 'react-dnd';
 import {ItemType} from '../constants/dragDropItem';
 
 type props = {
-  connectDragSource:
-    ? DragSourceType < {} >,
-  isDragging:
-    ? boolean
+  connectDragSource: DragSourceType < {} >,
+  isDragging: boolean
 }
 const knightSource = {
   beginDrag(props) {

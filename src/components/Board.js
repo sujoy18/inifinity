@@ -7,15 +7,15 @@ import BoardSquare from "./BoardSquare";
 
 type Props = {
   knightPosition: Array < number >,
-  onClickHandle: Function
+  onHandleDragDrop: Function
 }
 
 class Board extends Component < Props > {
 
-  handleClick = (position : Object) => {
+  handleDragDrop = (position : Object) => {
     this
       .props
-      .onClickHandle(position)
+      .onHandleDragDrop(position)
   }
 
   renderSquare(index : number) {
@@ -35,7 +35,7 @@ class Board extends Component < Props > {
       height: '12.5%'
     }}>
       <BoardSquare
-        onHandleClick={this.handleClick}
+        onHandleDragDrop={this.handleDragDrop}
         black={black}
         position={{
         x: x,

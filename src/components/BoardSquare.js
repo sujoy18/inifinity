@@ -7,7 +7,7 @@ import {ItemType} from '../constants/dragDropItem';
 type Props = {
   black: bool,
   children: Node,
-  onHandleClick: Function,
+  onHandleDragDrop: Function,
   position: Object,
   connectDropTarget: Function,
   isOver: bool
@@ -15,7 +15,7 @@ type Props = {
 
 const sourceTarget = {
   drop(props) {
-    props.onHandleClick(props.position)
+    props.onHandleDragDrop(props.position)
   }
 }
 
